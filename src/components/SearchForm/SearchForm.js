@@ -4,7 +4,7 @@ export default function MoviesPage({ getSearchValue }) {
     const [query, setQuery] = useState('');
 
     const handleInputChange = e => {
-        setQuery(e.target.value.toLowerCase());
+        setQuery(e.currentTarget.value.toLowerCase());
         console.log(e.target.value);
     };
     

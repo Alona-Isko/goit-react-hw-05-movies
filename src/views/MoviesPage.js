@@ -14,9 +14,8 @@ export default function MoviesPage() {
         }
 
         fetchMovies.fetchSearchMovie(query)
-            .then(data => {
-                console.log(data);
-                setData(data);
+            .then(({results}) => {
+                setData(results);
             })
     }, [query]);
 

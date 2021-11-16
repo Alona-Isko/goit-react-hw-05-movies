@@ -1,7 +1,6 @@
 // import PropTypes from 'prop-types';
 
 export default function MoviesList({ data }) {
-    
     return (
         <ul>
             {data.map(movie => {
