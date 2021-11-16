@@ -1,40 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function MoviesPage({getSearchValue}) {
+import SearchForm from '../components/SearchForm/SearchForm';
+import * as fetchMovies from '../services/movies-api';
+import MoviesList from "../components/MoviesList/MoviesList";
+
+export default function MoviesPage() {
     const [query, setQuery] = useState('');
+    const [data, setData] = useState([]);
 
-    const handleSubmit = e => {
-        e.preventDefault();
+    useEffect(() => {
+        if (query === '') {
+            return;
+        }
 
-        // if (query.trim() === '') {
-            
-        // }
-        
-        getSearchValue(query);
-        setQuery('');
+        fetchMovies.fetchSearchMovie(query)
+            .then(data => {
+                console.log(data);
+                setData(data);
+            })
+    }, [query]);
+
+    const getSearchValue = query => {
+        setQuery(query);
+        // setPage(1);
+        setData([]);
     };
-
-    const handleInputChange = e => {
-        setQuery(e.target.value.toLowerCase());
-        console.log(e.target.value);
-    };
-
+    
 
     return (
-        <form
-            onSubmit={handleSubmit}
-        >
-            <input
-                type="text"
-                value={query}
-                autoComplete="off"
-                autoFocus
-                placeholder="Search movies"
-                onChange={handleInputChange}
-            />
-            <button type="submit" >
-                Search
-            </button>
-        </form>
+        <>
+            <SearchForm getSearchValue={getSearchValue}/>
+
+            <MoviesList data={data} />
+        </>
     )
 }
