@@ -6,11 +6,11 @@ async function fetchBase(url = '', config = {}) {
     return res.ok ? await res.json() : Promise.reject(new Error('Not found'));
 }
 
-export function fetchTrends() {
-    return fetchBase(`${BASE_URL}/trending/movie/week?api_key=${KEY}`);
+export function fetchTrends(page=1) {
+    return fetchBase(`${BASE_URL}/trending/movie/day?page=${page}&api_key=${KEY}`);
 }
 
-export function fetchSearchMovie(query, page) {
+export function fetchSearchMovie(query='', page=1) {
     return fetchBase(`${BASE_URL}/search/movie?query=${query}&page=${page}&api_key=${KEY}`);
 }
 
