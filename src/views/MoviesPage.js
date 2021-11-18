@@ -14,10 +14,11 @@ export default function MoviesPage() {
         }
 
         fetchMovies.fetchSearchMovie(query)
-            .then(({results}) => {
-                setData(results);
-            })
+            .then(data => {
+                setData(data.results);
+            });
     }, [query]);
+    console.log(data);
 
     const getSearchValue = query => {
         setQuery(query);

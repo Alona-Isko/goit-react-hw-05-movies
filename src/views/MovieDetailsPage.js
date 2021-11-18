@@ -1,10 +1,13 @@
-import { useParams } from "react-router";
+import { Route, useParams } from "react-router";
 import { useState, useEffect } from "react";
+import { NavLink, useRouteMatch } from "react-router-dom";
 
 import * as fetchMovies from '../services/movies-api';
-
+import Cast from "../components/Cast/Cast";
+import Reviews from '../components/Reviews/Reviews';
 
 export default function MovieDetailsPage() {
+    const {url, path} = useRouteMatch();
     const { movieId } = useParams();
     const [movies, setMovies] = useState([]);
     
@@ -54,12 +57,34 @@ export default function MovieDetailsPage() {
             <div>
                 <h3>Additional information</h3>
                 <ul>
-                    <li>Cast</li>
-                    <li>Previews</li>
+                    <li >
+                        <NavLink
+                            to={`${url}/cast`}
+                        >
+                            Cast
+                        </NavLink>
+                    </li>
+                            
+                    <li>
+                        <NavLink
+                            to={`${url}/reviews`}
+                        >
+                            Reviews
+                        </NavLink>
+                    </li>
                 </ul>
+                        
+                <Route path={`${path}/cast`}>
+                    <Cast />        
+                </Route>
+                        
+                <Route path={`${path}/reviews`}>
+                    <Reviews />
+                </Route>
+                        
             </div>
-        </article>
-            )}
+            </article>
+        )}
     </>
     );
 };
