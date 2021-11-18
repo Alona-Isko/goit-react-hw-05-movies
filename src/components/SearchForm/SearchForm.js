@@ -5,7 +5,6 @@ export default function MoviesPage({ getSearchValue }) {
 
     const handleInputChange = e => {
         setQuery(e.currentTarget.value.toLowerCase());
-        console.log(e.target.value);
     };
     
     const handleSubmit = e => {
