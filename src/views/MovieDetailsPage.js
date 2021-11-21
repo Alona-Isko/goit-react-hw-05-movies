@@ -1,6 +1,6 @@
 import { Route, useParams } from "react-router";
 import { useState, useEffect } from "react";
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { NavLink, useRouteMatch, useLocation, useHistory } from "react-router-dom";
 
 import * as fetchMovies from '../services/movies-api';
 import Cast from "../components/Cast/Cast";
@@ -9,6 +9,9 @@ import Reviews from '../components/Reviews/Reviews';
 export default function MovieDetailsPage() {
     const {url, path} = useRouteMatch();
     const { movieId } = useParams();
+    const location = useLocation();
+    // console.log('MovieDetailsPage:', location);
+    const history = useHistory();
     const [movies, setMovies] = useState([]);
     
     useEffect(() => {
@@ -16,15 +19,22 @@ export default function MovieDetailsPage() {
             .fetchMoreInfo(movieId)
             .then(setMovies);
     }, [movieId]);
+ 
+    const onGoBack = () => {
+        history.push(location?.state?.from ?? '/movies');
+    };
 
-    
+
     return (
     <>
         { movies && (
             <article>
-            <button type="button">
-                &#x027F5; Go back
-            </button>
+                <button
+                    type="button"
+                    onClick={onGoBack}
+                >
+                    &#x027F5; Go back
+                </button>
 
             <div>
                 {movies.poster_path && (
@@ -61,6 +71,12 @@ export default function MovieDetailsPage() {
                         <NavLink
                             to={`${url}/cast`}
                         >
+                                    {/* <NavLink
+                            to={{
+                            pathname: `${url}/cast,
+                            state: {from: }
+                        }}
+                        > */}
                             Cast
                         </NavLink>
                     </li>
