@@ -1,10 +1,16 @@
-import { Route, useParams } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
+import { Route, useParams } from "react-router-dom";
 import { NavLink, useRouteMatch, useLocation, useHistory } from "react-router-dom";
 
 import * as fetchMovies from '../services/movies-api';
-import Cast from "../components/Cast/Cast";
-import Reviews from '../components/Reviews/Reviews';
+
+const Cast = lazy(() =>
+    import('../components/Cast/Cast.js' /* webpackChunkName: "cast"*/),
+);
+const Reviews = lazy(() =>
+    import('../components/Reviews/Reviews.js' /* webpackChunkName: "reviews"*/),
+);
+
 
 export default function MovieDetailsPage() {
     const {url, path} = useRouteMatch();
@@ -68,13 +74,10 @@ export default function MovieDetailsPage() {
                 <h3>Additional information</h3>
                 <ul>
                     <li >
-                        {/* <NavLink
-                            to={`${url}/cast`}
-                        > */}
-                                    <NavLink
+                        <NavLink
                             to={{
                             pathname: `${url}/cast`,
-                            state: {from: location.state},
+                            state: {...location.state},
                         }}
                         >
                             Cast
@@ -83,20 +86,25 @@ export default function MovieDetailsPage() {
                             
                     <li>
                         <NavLink
-                            to={`${url}/reviews`}
+                            to={{
+                                pathname: `${url}/reviews`,
+                                state: {...location.state},
+                            }}
                         >
                             Reviews
                         </NavLink>
                     </li>
                 </ul>
-                        
-                <Route path={`${path}/cast`}>
-                    <Cast />        
-                </Route>
-                        
-                <Route path={`${path}/reviews`}>
-                    <Reviews />
-                </Route>
+
+                 <Suspense fallback={<h1>Loading...</h1>}>       
+                    <Route path={`${path}/cast`}>
+                        <Cast />        
+                    </Route>
+                            
+                    <Route path={`${path}/reviews`}>
+                        <Reviews />
+                    </Route>
+                </Suspense>
                         
             </div>
             </article>
