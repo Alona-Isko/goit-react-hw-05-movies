@@ -9,9 +9,9 @@ import Reviews from '../components/Reviews/Reviews';
 export default function MovieDetailsPage() {
     const {url, path} = useRouteMatch();
     const { movieId } = useParams();
+    const history = useHistory();
     const location = useLocation();
     // console.log('MovieDetailsPage:', location);
-    const history = useHistory();
     const [movies, setMovies] = useState([]);
     
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function MovieDetailsPage() {
     }, [movieId]);
  
     const onGoBack = () => {
-        history.push(location?.state?.from ?? '/movies');
+        history.push(location?.state?.from ?? '/');
     };
 
 
@@ -68,15 +68,15 @@ export default function MovieDetailsPage() {
                 <h3>Additional information</h3>
                 <ul>
                     <li >
-                        <NavLink
+                        {/* <NavLink
                             to={`${url}/cast`}
-                        >
-                                    {/* <NavLink
-                            to={{
-                            pathname: `${url}/cast,
-                            state: {from: }
-                        }}
                         > */}
+                                    <NavLink
+                            to={{
+                            pathname: `${url}/cast`,
+                            state: {from: location.state},
+                        }}
+                        >
                             Cast
                         </NavLink>
                     </li>
