@@ -1,12 +1,24 @@
+.nav {
+  display: flex;
+  align-items: center;
+  min-height: 80px;
+  padding: 0 40px;
+  background-color: #506a85;
+  border-bottom: 1px solid #1b4370;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+}
+
 .link {
   display: inline-block;
   text-decoration: none;
   padding: 12px;
+  font-size: 22px;
   font-weight: 500;
-  color: #2a363b;
-  font-size: 18px;
+  color: #ffffff;
+  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);
 }
 
 .activeLink {
-  color: #2196f3;
+  font-size: 24px;
+  color: #eb7686;
 }

@@ -1,0 +1,20 @@
+.movie__wrap {
+  margin-top: 35px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.movie__container {
+  display: inline-flex;
+  margin-top: 25px;
+}
+
+.movie__img {
+  margin-bottom: 15px;
+  width: 320px;
+  border-radius: 5px;
+}
+
+.movie__content {
+  padding: 0 20px;
+}

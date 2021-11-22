@@ -1,8 +1,9 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Route, useParams } from "react-router-dom";
 import { NavLink, useRouteMatch, useLocation, useHistory } from "react-router-dom";
-
+import GoBackButton from "../components/GoBackButton/GoBackButton";
 import * as fetchMovies from '../services/movies-api';
+import s from './MovieDetailsPage.module.css';
 
 const Cast = lazy(() =>
     import('../components/Cast/Cast.js' /* webpackChunkName: "cast"*/),
@@ -34,24 +35,22 @@ export default function MovieDetailsPage() {
     return (
     <>
         { movies && (
-            <article>
-                <button
-                    type="button"
-                    onClick={onGoBack}
-                >
-                    &#x027F5; Go back
-                </button>
+                <article className={s.movie__wrap}>
+                    <GoBackButton
+                        onGoBack={onGoBack}
+                    />
 
-            <div>
+            <div className={s.movie__container}>
                 {movies.poster_path && (
                     <img
                         src={`https://image.tmdb.org/t/p/w300/${movies.poster_path}`}
                         alt={movies.title}
-                        width="320"
+                                width="320"
+                                className={s.movie__img}
                     />
                 )}
 
-                <div>
+                <div className={s.movie__content}>
                     <h2>{movies.title}</h2>
                     <p>User Score: {movies.vote_average * 10}%</p>
                     

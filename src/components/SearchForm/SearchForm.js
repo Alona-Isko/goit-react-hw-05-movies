@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { toast } from 'react-toastify';
+import s from './SearchForm.module.css';
 
-
-export default function MoviesPage({ getSearchValue }) {
+export default function SearchForm({ getSearchValue }) {
     const [query, setQuery] = useState('');
 
     const handleInputChange = e => {
@@ -11,9 +12,10 @@ export default function MoviesPage({ getSearchValue }) {
     const handleSubmit = e => {
         e.preventDefault();
 
-        // if (query.trim() === '') {
-            
-        // }
+        if (query.trim() === '') {
+            toast('Your query is empty');
+            return;
+        }
 
         getSearchValue(query);
         setQuery('');
@@ -22,7 +24,8 @@ export default function MoviesPage({ getSearchValue }) {
 
     return (
             <form
-                onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
+            className={s.form}
             >
                 <input
                     type="text"
@@ -32,8 +35,12 @@ export default function MoviesPage({ getSearchValue }) {
                     autoFocus
                     placeholder="Search movies"
                     onChange={handleInputChange}
+                    className={s.input}
                 />
-                <button type="submit" >
+            <button
+                type="submit"
+                className={s.form__btn}
+            >
                     Search
                 </button>
             </form>

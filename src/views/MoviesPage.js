@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 import SearchForm from '../components/SearchForm/SearchForm';
 import * as fetchMovies from '../services/movies-api';
@@ -57,6 +59,10 @@ export default function MoviesPage() {
             />
 
             <MoviesList data={data} />
+
+            <ToastContainer
+                autoClose={2000}
+            />
         </>
     )
 }

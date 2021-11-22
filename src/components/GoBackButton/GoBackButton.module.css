@@ -1,0 +1,17 @@
+.btn__goback {
+  margin-left: 15px;
+  padding: 10px 15px;
+
+  border-radius: 5px;
+  border: 1px solid #1b4370;
+  opacity: 1;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #506a85;
+}
+
+.btn__goback:hover,
+.btn__goback:focus {
+  opacity: 0.9;
+}

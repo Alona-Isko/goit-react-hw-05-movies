@@ -1,0 +1,31 @@
+body {
+  background-color: rgb(80, 106, 133, 0.3);
+}
+
+img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+button {
+  cursor: pointer;
+}
