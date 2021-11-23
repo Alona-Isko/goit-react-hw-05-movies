@@ -4,6 +4,7 @@ import './App.css';
 
 import Container from './components/Container/Container';
 import Navigation from './components/Navigation/Navigation';
+import Loader from './components/Loader/Loader';
 
 const HomePage = lazy(() =>
   import('./views/HomePage.js' /* webpackChunkName: "home-page"*/),
@@ -24,7 +25,7 @@ export default function App() {
     <Container>
       <Navigation />
 
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<h1><Loader /></h1>}>
         <Switch>
           <Route path="/" exact>
             <HomePage />

@@ -7,6 +7,7 @@ import {
     useLocation,
     useHistory
 } from "react-router-dom";
+import Loader from "../components/Loader/Loader";
 import GoBackButton from "../components/GoBackButton/GoBackButton";
 import * as fetchMovies from '../services/movies-api';
 import s from './MovieDetailsPage.module.css';
@@ -26,11 +27,14 @@ export default function MovieDetailsPage() {
     const location = useLocation();
     // console.log('MovieDetailsPage:', location);
     const [movies, setMovies] = useState([]);
+    const [loading, setLoading] = useState(false);
     
     useEffect(() => {
+        setLoading(true);
         fetchMovies
             .fetchMoreInfo(movieId)
-            .then(setMovies);
+            .then(setMovies)
+            .finally(setLoading(false));
     }, [movieId]);
  
     const onGoBack = () => {
@@ -40,6 +44,7 @@ export default function MovieDetailsPage() {
 
     return (
         <>
+            {loading && <Loader />}
             <GoBackButton
                 onGoBack={onGoBack}
             />
@@ -101,7 +106,7 @@ export default function MovieDetailsPage() {
                         </li>
                     </ul>
 
-                    <Suspense fallback={<h1>Loading...</h1>}>       
+                    <Suspense fallback={<h1><Loader /></h1>}>       
                         <Route path={`${path}/cast`}>
                             <Cast />        
                         </Route>

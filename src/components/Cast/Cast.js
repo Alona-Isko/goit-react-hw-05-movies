@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import Loader from "../Loader/Loader";
 import * as fetchMovies from '../../services/movies-api';
 import noImage from './noImage.png';
 import s from './Cast.module.css';
@@ -8,18 +9,22 @@ import s from './Cast.module.css';
 export default function Cast() {
     const { movieId } = useParams();
     const [actors, setActors] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         fetchMovies
             .fetchCast(movieId)
             .then(data => {
                 setActors(data.cast);
-            });
+            })
+            .finally(setLoading(false));
     }, [movieId]);
 
     
     return (
         <>
+            {loading && <Loader />}
             <ul className={s.cast__wrap}>
                 {actors &&
                     actors.map(actor => (
