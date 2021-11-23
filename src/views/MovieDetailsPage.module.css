@@ -1,5 +1,4 @@
 .movie__wrap {
-  margin-top: 35px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -16,5 +15,26 @@
 }
 
 .movie__content {
-  padding: 0 20px;
+  padding: 0 30px;
+}
+
+.content__title {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.content__text {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  font-size: 18px;
+  text-align: justify;
+}
+
+.content__genres {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.sec__title {
+  font-size: 20px;
 }

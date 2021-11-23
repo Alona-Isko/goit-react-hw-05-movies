@@ -1,0 +1,28 @@
+.cast__wrap {
+  margin-top: 35px;
+}
+
+.cast__item {
+  margin-bottom: 20px;
+}
+
+.cast__actor {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.character__text {
+  font-size: 18px;
+}
+
+.character__title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.error__text {
+  margin-top: 15px;
+  font-size: 20px;
+}

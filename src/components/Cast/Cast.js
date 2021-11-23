@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import * as fetchMovies from '../../services/movies-api';
+import noImage from './noImage.png';
+import s from './Cast.module.css';
 
 
 export default function Cast() {
@@ -15,26 +17,30 @@ export default function Cast() {
             });
     }, [movieId]);
 
+    
     return (
         <>
-            <ul>
+            <ul className={s.cast__wrap}>
                 {actors &&
                     actors.map(actor => (
-                        <li key={actor.id}>
+                        <li key={actor.id} className={s.cast__item}>
                             <img
-                                src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                                src={
+                                    actor.profile_path
+                                        ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
+                                    : noImage}
                                 alt={actor.name}
                                 width="150"
                             />
-                            <p>{actor.name}</p>
-                            <p>Character: {actor.character}</p>
+                            <p className={s.cast__actor}>{actor.name}</p>
+                            <p className={s.character__text}><span className={s.character__title}>Character</span>: {actor.character}</p>
                         </li>
                     )
                 )}
             </ul>
 
             {actors.length === 0 && (
-                <p>There is no information about cast</p>
+                <p className={s.error__text}>There is no information</p>
             )}
         </>
     );
