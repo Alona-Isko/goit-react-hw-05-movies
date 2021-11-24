@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useLocation, useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 import s from './SearchForm.module.css';
 
-export default function SearchForm({ getSearchValue }) {
+export default function SearchForm({ onSubmit }) {
+    const location = useLocation();
+    const history = useHistory();
     const [query, setQuery] = useState('');
 
     const handleInputChange = e => {
@@ -16,8 +19,8 @@ export default function SearchForm({ getSearchValue }) {
             toast('Your query is empty');
             return;
         }
-
-        getSearchValue(query);
+        history.push({ ...location, search: `query=${query}` });
+        onSubmit(query);
         setQuery('');
     };
 
@@ -33,7 +36,7 @@ export default function SearchForm({ getSearchValue }) {
                     value={query}
                     autoComplete="off"
                     autoFocus
-                    placeholder="Search movies"
+                    placeholder="Search movie"
                     onChange={handleInputChange}
                     className={s.input}
                 />
